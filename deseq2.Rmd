@@ -1,0 +1,51 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+```{r}
+library(tidyverse)
+library(DESeq2)
+```
+```{r}
+df <- read_csv(file = 'data/DE_data_tumor_TP10k.csv')
+```
+
+```{r}
+df <- column_to_rownames(df, var = "gene") 
+head(df)
+```
+```{r}
+sort(rownames(df))
+```
+
+```{r}
+col_data = read_csv(file = 'data/colData_deseq.csv')
+```
+```{r}
+head(col_data)
+```
+```{r}
+df = df +1
+```
+```{r}
+head(df)
+```
+
+```{r}
+dds <- DESeqDataSetFromMatrix(countData=df, 
+                              colData=col_data, 
+                            design=~HTR1D_zero)
+```
+```{r}
+dds
+```
+
+```{r}
+dds <- DESeq(dds)
+```
+```{r}
+
+```
+
