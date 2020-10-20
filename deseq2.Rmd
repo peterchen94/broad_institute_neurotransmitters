@@ -17,10 +17,6 @@ df <- column_to_rownames(df, var = "gene")
 head(df)
 ```
 ```{r}
-sort(rownames(df))
-```
-
-```{r}
 col_data = read_csv(file = 'data/colData_deseq.csv')
 ```
 ```{r}
@@ -30,54 +26,34 @@ head(col_data)
 # add 1 so counts are non-zero - deseq gives error if every gene has a 0 value
 df = df +1
 ```
+
+# Correct gene counts by adding 1 
 ```{r}
 head(df)
 ```
+# DESEQ analysis loop
+
+### Loop through each of the gene zero/nonzero groups and do a deseq analysis for each group
+
+### add patient id to the formula to control for the different patients s
+
+
 ```{r}
 for(col in colnames(col_data)){
   if(grepl('zero', col)){
     
-    formula = paste('~',col,sept = '')
+    formula = paste('~ patient_id + ',col,sept = '')
     dds <- DESeqDataSetFromMatrix(countData=df, 
                                   colData=col_data, 
                                   design=as.formula(formula))
     
-    
     dds <- DESeq(dds)
     res <- results(dds)
-    
     
     filename = paste('data/deseq_output_',col,'.csv',sep = '')
     write.csv(res, file = filename)
   }
 
 }
-```
-
-```{r}
-
-
-
-dds <- DESeqDataSetFromMatrix(countData=df, 
-                              colData=col_data, 
-                              design=as.formula('~HTR1D_zero'))
-
-
-dds <- DESeq(dds)
-res <- results(dds)
-
-```
-```{r}
-
-filename = paste('data/deseq_output_',col,'.csv',sep = '')
-write.csv(res, file = filename)
-```
-
-```{r}
-
-
-```
-```{r}
-
 ```
 

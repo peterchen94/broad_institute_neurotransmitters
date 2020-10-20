@@ -1904,17 +1904,6 @@ head(df)</code></pre>
 <!-- rnb-frame-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc29ydChyb3duYW1lcyhkZikpXG5gYGAifQ== -->
-<pre class="r"><code>sort(rownames(df))</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiIFsxXSBcIkFCQVRcIiAgICBcIkFDRVwiICAgICBcIkFDSEVcIiAgICBcIkFMREgyXCIgICBcIkNIUk5BNVwiICBcIkREQ1wiICAgICBcIkRSRDRcIiAgICBcIkdBQlJFXCIgICBcIkdBQlJQXCIgICBcIkdBRDFcIiAgICBcIkdMVUQxXCIgIFxuWzEyXSBcIkdMVUxcIiAgICBcIkdSSU4yRFwiICBcIkhUUjFEXCIgICBcIkhUUjJCXCIgICBcIlBBTVwiICAgICBcIlNMQzFBM1wiICBcIlNMQzM4QTFcIiBcIlNMQzM4QTJcIiBcIlNMQzM4QTVcIiBcIlNMQzZBMTJcIiBcIlRBQzNcIiAgIFxuIn0= -->
-<pre><code> [1] &quot;ABAT&quot;    &quot;ACE&quot;     &quot;ACHE&quot;    &quot;ALDH2&quot;   &quot;CHRNA5&quot;  &quot;DDC&quot;     &quot;DRD4&quot;    &quot;GABRE&quot;   &quot;GABRP&quot;   &quot;GAD1&quot;    &quot;GLUD1&quot;  
-[12] &quot;GLUL&quot;    &quot;GRIN2D&quot;  &quot;HTR1D&quot;   &quot;HTR2B&quot;   &quot;PAM&quot;     &quot;SLC1A3&quot;  &quot;SLC38A1&quot; &quot;SLC38A2&quot; &quot;SLC38A5&quot; &quot;SLC6A12&quot; &quot;TAC3&quot;   </code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29sX2RhdGEgPSByZWFkX2NzdihmaWxlID0gJ2RhdGEvY29sRGF0YV9kZXNlcS5jc3YnKVxuYGBgIn0= -->
 <pre class="r"><code>col_data = read_csv(file = &#39;data/colData_deseq.csv&#39;)</code></pre>
 <!-- rnb-source-end -->
@@ -1945,6 +1934,10 @@ cols(
 <pre class="r"><code>df = df +1</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<div id="correct-gene-counts-by-adding-1" class="section level1">
+<h1>Correct gene counts by adding 1</h1>
+<!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaGVhZChkZilcbmBgYCJ9 -->
 <pre class="r"><code>head(df)</code></pre>
@@ -1957,88 +1950,42 @@ cols(
 </div>
 <!-- rnb-frame-end -->
 <!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="deseq-analysis-loop" class="section level1">
+<h1>DESEQ analysis loop</h1>
+<div id="loop-through-each-of-the-gene-zerononzero-groups-and-do-a-deseq-analysis-for-each-group" class="section level3">
+<h3>Loop through each of the gene zero/nonzero groups and do a deseq analysis for each group</h3>
+</div>
+<div id="add-patient-id-to-the-formula-to-control-for-the-different-patients-s" class="section level3">
+<h3>add patient id to the formula to control for the different patients s</h3>
+<!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZm9yKGNvbCBpbiBjb2xuYW1lcyhjb2xfZGF0YSkpe1xuICBcbiAgaWYoZ3JlcGwoJ3plcm8nLCBjb2wpKXtcbiAgICAgIHByaW50KGNvbClcbiAgfVxuXG59XG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZm9yKGNvbCBpbiBjb2xuYW1lcyhjb2xfZGF0YSkpe1xuICBpZihncmVwbCgnemVybycsIGNvbCkpe1xuICAgIFxuICAgIGZvcm11bGEgPSBwYXN0ZSgnfiBwYXRpZW50X2lkICsgJyxjb2wsc2VwdCA9ICcnKVxuICAgIGRkcyA8LSBERVNlcURhdGFTZXRGcm9tTWF0cml4KGNvdW50RGF0YT1kZiwgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgY29sRGF0YT1jb2xfZGF0YSwgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZGVzaWduPWFzLmZvcm11bGEoZm9ybXVsYSkpXG4gICAgXG4gICAgZGRzIDwtIERFU2VxKGRkcylcbiAgICByZXMgPC0gcmVzdWx0cyhkZHMpXG4gICAgXG4gICAgZmlsZW5hbWUgPSBwYXN0ZSgnZGF0YS9kZXNlcV9vdXRwdXRfJyxjb2wsJy5jc3YnLHNlcCA9ICcnKVxuICAgIHdyaXRlLmNzdihyZXMsIGZpbGUgPSBmaWxlbmFtZSlcbiAgfVxuXG59XG5gYGAifQ== -->
 <pre class="r"><code>for(col in colnames(col_data)){
-  
   if(grepl(&#39;zero&#39;, col)){
-      print(col)
+    
+    formula = paste(&#39;~ patient_id + &#39;,col,sept = &#39;&#39;)
+    dds &lt;- DESeqDataSetFromMatrix(countData=df, 
+                                  colData=col_data, 
+                                  design=as.formula(formula))
+    
+    dds &lt;- DESeq(dds)
+    res &lt;- results(dds)
+    
+    filename = paste(&#39;data/deseq_output_&#39;,col,&#39;.csv&#39;,sep = &#39;&#39;)
+    write.csv(res, file = filename)
   }
 
 }</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiSFRSMURfemVyb1wiXG5bMV0gXCJHTFVMX3plcm9cIlxuWzFdIFwiR0FEMV96ZXJvXCJcblsxXSBcIkhUUjJCX3plcm9cIlxuWzFdIFwiU0xDMUEzX3plcm9cIlxuWzFdIFwiUEFNX3plcm9cIlxuWzFdIFwiR0FCUlBfemVyb1wiXG5bMV0gXCJERENfemVyb1wiXG5bMV0gXCJBQ0hFX3plcm9cIlxuWzFdIFwiU0xDMzhBNV96ZXJvXCJcblsxXSBcIkdBQlJFX3plcm9cIlxuWzFdIFwiRFJENF96ZXJvXCJcblsxXSBcIkdMVUQxX3plcm9cIlxuWzFdIFwiU0xDNkExMl96ZXJvXCJcblsxXSBcIlNMQzM4QTFfemVyb1wiXG5bMV0gXCJTTEMzOEEyX3plcm9cIlxuWzFdIFwiVEFDM196ZXJvXCJcblsxXSBcIkFMREgyX3plcm9cIlxuWzFdIFwiQ0hSTkE1X3plcm9cIlxuWzFdIFwiQUJBVF96ZXJvXCJcblsxXSBcIkFDRV96ZXJvXCJcblsxXSBcIkdSSU4yRF96ZXJvXCJcbiJ9 -->
-<pre><code>[1] &quot;HTR1D_zero&quot;
-[1] &quot;GLUL_zero&quot;
-[1] &quot;GAD1_zero&quot;
-[1] &quot;HTR2B_zero&quot;
-[1] &quot;SLC1A3_zero&quot;
-[1] &quot;PAM_zero&quot;
-[1] &quot;GABRP_zero&quot;
-[1] &quot;DDC_zero&quot;
-[1] &quot;ACHE_zero&quot;
-[1] &quot;SLC38A5_zero&quot;
-[1] &quot;GABRE_zero&quot;
-[1] &quot;DRD4_zero&quot;
-[1] &quot;GLUD1_zero&quot;
-[1] &quot;SLC6A12_zero&quot;
-[1] &quot;SLC38A1_zero&quot;
-[1] &quot;SLC38A2_zero&quot;
-[1] &quot;TAC3_zero&quot;
-[1] &quot;ALDH2_zero&quot;
-[1] &quot;CHRNA5_zero&quot;
-[1] &quot;ABAT_zero&quot;
-[1] &quot;ACE_zero&quot;
-[1] &quot;GRIN2D_zero&quot;</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5cblxuZGRzIDwtIERFU2VxRGF0YVNldEZyb21NYXRyaXgoY291bnREYXRhPWRmLCBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNvbERhdGE9Y29sX2RhdGEsIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZGVzaWduPWFzLmZvcm11bGEoJ35IVFIxRF96ZXJvJykpXG5gYGAifQ== -->
-<pre class="r"><code>
+</div>
+</div>
 
-
-dds &lt;- DESeqDataSetFromMatrix(countData=df, 
-                              colData=col_data, 
-                              design=as.formula(&#39;~HTR1D_zero&#39;))</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiY29udmVydGluZyBjb3VudHMgdG8gaW50ZWdlciBtb2RlXG5zb21lIHZhcmlhYmxlcyBpbiBkZXNpZ24gZm9ybXVsYSBhcmUgY2hhcmFjdGVycywgY29udmVydGluZyB0byBmYWN0b3JzXG4ifQ== -->
-<pre><code>converting counts to integer mode
-some variables in design formula are characters, converting to factors</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGRzIDwtIERFU2VxKGRkcylcbmBgYCJ9 -->
-<pre class="r"><code>dds &lt;- DESeq(dds)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiZXN0aW1hdGluZyBzaXplIGZhY3RvcnNcbmVzdGltYXRpbmcgZGlzcGVyc2lvbnNcbmdlbmUtd2lzZSBkaXNwZXJzaW9uIGVzdGltYXRlc1xubWVhbi1kaXNwZXJzaW9uIHJlbGF0aW9uc2hpcFxuLS0gbm90ZTogZml0VHlwZT0ncGFyYW1ldHJpYycsIGJ1dCB0aGUgZGlzcGVyc2lvbiB0cmVuZCB3YXMgbm90IHdlbGwgY2FwdHVyZWQgYnkgdGhlXG4gICBmdW5jdGlvbjogeSA9IGEveCArIGIsIGFuZCBhIGxvY2FsIHJlZ3Jlc3Npb24gZml0IHdhcyBhdXRvbWF0aWNhbGx5IHN1YnN0aXR1dGVkLlxuICAgc3BlY2lmeSBmaXRUeXBlPSdsb2NhbCcgb3IgJ21lYW4nIHRvIGF2b2lkIHRoaXMgbWVzc2FnZSBuZXh0IHRpbWUuXG5Fc3RpbWF0ZWQgcmRmIDwgMS4wOyBub3QgZXN0aW1hdGluZyB2YXJpYW5jZWZpbmFsIGRpc3BlcnNpb24gZXN0aW1hdGVzXG5maXR0aW5nIG1vZGVsIGFuZCB0ZXN0aW5nXG4ifQ== -->
-<pre><code>estimating size factors
-estimating dispersions
-gene-wise dispersion estimates
-mean-dispersion relationship
--- note: fitType=&#39;parametric&#39;, but the dispersion trend was not well captured by the
-   function: y = a/x + b, and a local regression fit was automatically substituted.
-   specify fitType=&#39;local&#39; or &#39;mean&#39; to avoid this message next time.
-Estimated rdf &lt; 1.0; not estimating variancefinal dispersion estimates
-fitting model and testing</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5maWxlbmFtZSA9IHBhc3RlKCdkYXRhL2Rlc2VxX291dHB1dF8nLGNvbCwnLmNzdicpXG53cml0ZS5jc3YocmVzLCBmaWxlID0gZmlsZW5hbWUpXG5gYGAifQ== -->
-<pre class="r"><code>
-filename = paste(&#39;data/deseq_output_&#39;,col,&#39;.csv&#39;)
-write.csv(res, file = filename)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-chunk-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKCmBgYHtyfQpsaWJyYXJ5KHRpZHl2ZXJzZSkKbGlicmFyeShERVNlcTIpCmBgYApgYGB7cn0KZGYgPC0gcmVhZF9jc3YoZmlsZSA9ICdkYXRhL0RFX2RhdGFfdHVtb3JfVFAxMGsuY3N2JykKYGBgCgpgYGB7cn0KZGYgPC0gY29sdW1uX3RvX3Jvd25hbWVzKGRmLCB2YXIgPSAiZ2VuZSIpIApoZWFkKGRmKQpgYGAKYGBge3J9CnNvcnQocm93bmFtZXMoZGYpKQpgYGAKCmBgYHtyfQpjb2xfZGF0YSA9IHJlYWRfY3N2KGZpbGUgPSAnZGF0YS9jb2xEYXRhX2Rlc2VxLmNzdicpCmBgYApgYGB7cn0KaGVhZChjb2xfZGF0YSkKYGBgCmBgYHtyfQojIGFkZCAxIHNvIGNvdW50cyBhcmUgbm9uLXplcm8gLSBkZXNlcSBnaXZlcyBlcnJvciBpZiBldmVyeSBnZW5lIGhhcyBhIDAgdmFsdWUKZGYgPSBkZiArMQpgYGAKYGBge3J9CmhlYWQoZGYpCmBgYApgYGB7cn0KZm9yKGNvbCBpbiBjb2xuYW1lcyhjb2xfZGF0YSkpewogIGlmKGdyZXBsKCd6ZXJvJywgY29sKSl7CiAgICAKICAgIGZvcm11bGEgPSBwYXN0ZSgnficsY29sLHNlcHQgPSAnJykKICAgIGRkcyA8LSBERVNlcURhdGFTZXRGcm9tTWF0cml4KGNvdW50RGF0YT1kZiwgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBjb2xEYXRhPWNvbF9kYXRhLCAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGRlc2lnbj1hcy5mb3JtdWxhKGZvcm11bGEpKQogICAgCiAgICAKICAgIGRkcyA8LSBERVNlcShkZHMpCiAgICByZXMgPC0gcmVzdWx0cyhkZHMpCiAgICAKICAgIAogICAgZmlsZW5hbWUgPSBwYXN0ZSgnZGF0YS9kZXNlcV9vdXRwdXRfJyxjb2wsJy5jc3YnLHNlcCA9ICcnKQogICAgd3JpdGUuY3N2KHJlcywgZmlsZSA9IGZpbGVuYW1lKQogIH0KCn0KYGBgCgpgYGB7cn0KCgoKZGRzIDwtIERFU2VxRGF0YVNldEZyb21NYXRyaXgoY291bnREYXRhPWRmLCAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgY29sRGF0YT1jb2xfZGF0YSwgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGRlc2lnbj1hcy5mb3JtdWxhKCd+SFRSMURfemVybycpKQoKCmRkcyA8LSBERVNlcShkZHMpCnJlcyA8LSByZXN1bHRzKGRkcykKCmBgYApgYGB7cn0KCmZpbGVuYW1lID0gcGFzdGUoJ2RhdGEvZGVzZXFfb3V0cHV0XycsY29sLCcuY3N2JyxzZXAgPSAnJykKd3JpdGUuY3N2KHJlcywgZmlsZSA9IGZpbGVuYW1lKQpgYGAKCmBgYHtyfQoKCmBgYApgYGB7cn0KCmBgYAoK</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKCmBgYHtyfQpsaWJyYXJ5KHRpZHl2ZXJzZSkKbGlicmFyeShERVNlcTIpCmBgYApgYGB7cn0KZGYgPC0gcmVhZF9jc3YoZmlsZSA9ICdkYXRhL0RFX2RhdGFfdHVtb3JfVFAxMGsuY3N2JykKYGBgCgpgYGB7cn0KZGYgPC0gY29sdW1uX3RvX3Jvd25hbWVzKGRmLCB2YXIgPSAiZ2VuZSIpIApoZWFkKGRmKQpgYGAKYGBge3J9CmNvbF9kYXRhID0gcmVhZF9jc3YoZmlsZSA9ICdkYXRhL2NvbERhdGFfZGVzZXEuY3N2JykKYGBgCmBgYHtyfQpoZWFkKGNvbF9kYXRhKQpgYGAKYGBge3J9CiMgYWRkIDEgc28gY291bnRzIGFyZSBub24temVybyAtIGRlc2VxIGdpdmVzIGVycm9yIGlmIGV2ZXJ5IGdlbmUgaGFzIGEgMCB2YWx1ZQpkZiA9IGRmICsxCmBgYAoKIyBDb3JyZWN0IGdlbmUgY291bnRzIGJ5IGFkZGluZyAxIApgYGB7cn0KaGVhZChkZikKYGBgCiMgREVTRVEgYW5hbHlzaXMgbG9vcAoKIyMjIExvb3AgdGhyb3VnaCBlYWNoIG9mIHRoZSBnZW5lIHplcm8vbm9uemVybyBncm91cHMgYW5kIGRvIGEgZGVzZXEgYW5hbHlzaXMgZm9yIGVhY2ggZ3JvdXAKCiMjIyBhZGQgcGF0aWVudCBpZCB0byB0aGUgZm9ybXVsYSB0byBjb250cm9sIGZvciB0aGUgZGlmZmVyZW50IHBhdGllbnRzIHMKCgpgYGB7cn0KZm9yKGNvbCBpbiBjb2xuYW1lcyhjb2xfZGF0YSkpewogIGlmKGdyZXBsKCd6ZXJvJywgY29sKSl7CiAgICAKICAgIGZvcm11bGEgPSBwYXN0ZSgnfiBwYXRpZW50X2lkICsgJyxjb2wsc2VwdCA9ICcnKQogICAgZGRzIDwtIERFU2VxRGF0YVNldEZyb21NYXRyaXgoY291bnREYXRhPWRmLCAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNvbERhdGE9Y29sX2RhdGEsIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZGVzaWduPWFzLmZvcm11bGEoZm9ybXVsYSkpCiAgICAKICAgIGRkcyA8LSBERVNlcShkZHMpCiAgICByZXMgPC0gcmVzdWx0cyhkZHMpCiAgICAKICAgIGZpbGVuYW1lID0gcGFzdGUoJ2RhdGEvZGVzZXFfb3V0cHV0XycsY29sLCcuY3N2JyxzZXAgPSAnJykKICAgIHdyaXRlLmNzdihyZXMsIGZpbGUgPSBmaWxlbmFtZSkKICB9Cgp9CmBgYAoK</div>
 
 
 
