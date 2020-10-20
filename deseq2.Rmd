@@ -27,23 +27,55 @@ col_data = read_csv(file = 'data/colData_deseq.csv')
 head(col_data)
 ```
 ```{r}
+# add 1 so counts are non-zero - deseq gives error if every gene has a 0 value
 df = df +1
 ```
 ```{r}
 head(df)
 ```
+```{r}
+for(col in colnames(col_data)){
+  if(grepl('zero', col)){
+    
+    formula = paste('~',col,sept = '')
+    dds <- DESeqDataSetFromMatrix(countData=df, 
+                                  colData=col_data, 
+                                  design=as.formula(formula))
+    
+    
+    dds <- DESeq(dds)
+    res <- results(dds)
+    
+    
+    filename = paste('data/deseq_output_',col,'.csv',sep = '')
+    write.csv(res, file = filename)
+  }
+
+}
+```
 
 ```{r}
+
+
+
 dds <- DESeqDataSetFromMatrix(countData=df, 
                               colData=col_data, 
-                            design=~HTR1D_zero)
+                              design=as.formula('~HTR1D_zero'))
+
+
+dds <- DESeq(dds)
+res <- results(dds)
+
 ```
 ```{r}
-dds
+
+filename = paste('data/deseq_output_',col,'.csv',sep = '')
+write.csv(res, file = filename)
 ```
 
 ```{r}
-dds <- DESeq(dds)
+
+
 ```
 ```{r}
 
