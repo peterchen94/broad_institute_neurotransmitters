@@ -134,3 +134,4 @@ dmypy.json
 /plot*
 
 /signature_distribution_plots
+/signature_distribution_boxplots
