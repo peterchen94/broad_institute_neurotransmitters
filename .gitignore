@@ -136,3 +136,5 @@ dmypy.json
 /signature_distribution_plots
 /signature_distribution_boxplots
 /single_cell_heatmaps
+
+**/outputs/
